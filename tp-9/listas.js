@@ -32,11 +32,11 @@ console.log("invertirLista([2,3,4]): ", invertirLista([2,3,4]))
  * - sumarLista([2,3,4]) retorna 9
  */
 function sumarLista(listaDeNumeros) {
-    let sumarLista = 0;
-    for(i= 0; i<listaDeNumeros.length; i++){
-        sumar = sumarLista + listaDeNumeros[i];
-}
-return sumarLista;
+    let suma = 0;
+    for (let i = 0; i < listaDeNumeros.length; i++) {
+        suma = suma + listaDeNumeros[i];   
+    }
+    return suma;
 }
 console.log("sumarLista([2,3,4]): ", sumarLista([2,3,4]))
 /**
@@ -71,7 +71,11 @@ console.log("contarElementosLista([2,3,4]): ", contarElementosLista([2,3,4]))
  * - calcularPromedio([2,3,4]) retorna 3
  */
 function calcularPromedio(listaDeNumeros) {
-    promedio = sumarLista(listaDeNumeros) / contarElementosLista(listaDeNumeros);
+    // Si la lista está vacía devolvemos 0 para evitar dividir 0/0 (NaN).
+    if (listaDeNumeros.length === 0) {
+        return 0;
+    }
+    let promedio = sumarLista(listaDeNumeros) / contarElementosLista(listaDeNumeros);
     return promedio;
 }
 console.log("calcularPromedio([2,3,4]): ", calcularPromedio([2,3,4]))
@@ -91,7 +95,7 @@ console.log("calcularPromedio(listaNumerosEjemplo): ", calcularPromedio(listaNum
  * - triplicarLista([1, 2, 3]) retorna [3, 6, 9]
  */
 function triplicarLista(listaDeNumeros) {
-    triplicado = [];
+    let triplicado = [];
     for(i=0; i<listaDeNumeros.length; i++){
         triplicado.push(listaDeNumeros[i]*3);
     }
@@ -116,7 +120,7 @@ console.log("triplicarLista([1, 2, 3]): ", triplicarLista([1, 2, 3]));
  * - crearListaDeNumeros(2,2) retorna [2]
  */
 function crearListaDeNumeros(inicio, fin) {
-    creacion = [];
+    let creacion = [];
     for(i=inicio; i<=fin; i++){
         creacion.push(i);
     }
@@ -159,8 +163,8 @@ console.log("ordenarDeMayorAMenor(listaNumerosEjemplo): ", ordenarDeMayorAMenor(
  */
 function encontrarNumeroMayor(listaDeNumeros) {
     let mayor = listaDeNumeros[0];
-    for(i=0; i<listaDeNumeros.length; i++){
-        if(listaDeNumeros[i] > mayor){
+    for (let i = 1; i < listaDeNumeros.length; i++) {
+        if (listaDeNumeros[i] > mayor) {
             mayor = listaDeNumeros[i];
         }
     }
@@ -203,7 +207,7 @@ console.log("ordenarPalabrasPorLongitud(['abc', 'a', 'ab']): ", ordenarPalabrasP
  */
 function encontrarPalabraMasCorta(listaDePalabras) {
     let corta = listaDePalabras[0];
-    for(i=0; i<listaDePalabras.length; i++){
+    for (let i = 1; i < listaDePalabras.length; i++){
         if(listaDePalabras[i].length < corta.length){
             corta = listaDePalabras[i];
         }
@@ -227,7 +231,7 @@ console.log("encontrarPalabraMasCorta(['abc', 'a', 'ab']): ", encontrarPalabraMa
  */
 function filtrarSoloPositivos(listaDeNumeros) {
     let positivos = [];
-    for(i=0; i<listaDeNumeros.length; i++){
+    for(let i=0; i<listaDeNumeros.length; i++){
         if(listaDeNumeros[i] > 0){
             positivos.push(listaDeNumeros[i]);
         }
@@ -252,7 +256,7 @@ console.log("filtrarSoloPositivos(listaNumerosEjemplo): ", filtrarSoloPositivos(
  */
 function contarAprobados(listaDeNotas) {
     let aprobados = 0;
-    for(i=0; i<listaDeNotas.length; i++){
+    for(let i=0; i<listaDeNotas.length; i++){
         if(listaDeNotas[i] >= 6){
             aprobados++;
         }
@@ -298,16 +302,15 @@ console.log("filtrarSoloTruthy(): ", filtrarSoloTruthy(["Hola", "", null, 1, 0, 
  * - enumerarLista(["Han", "Leia", "Luke", "Yoda"]) "Han, Leia, Luke y Yoda."
  */
 function enumerarLista(listaDePalabras) {
-    let enumeracion = "";
-    for(i=0; i<listaDePalabras.length; i++){
-        if(i === listaDePalabras.length - 1 && listaDePalabras.length > 1){
-            enumeracion += "y " + listaDePalabras[i] + ".";
-        } else if (i === listaDePalabras.length - 1) {
-            enumeracion += listaDePalabras[i] + ".";
-        } else {
-            enumeracion += listaDePalabras[i] + ", ";
-        }
+    let n = listaDePalabras.length;
+    if (n === 0) return "";
+    let oracion;
+    if (n === 1) {
+        oracion = listaDePalabras[0] + ".";
+    } else {
+        let principio = listaDePalabras.slice(0, n - 1).join(", ");
+        oracion = principio + " y " + listaDePalabras[n - 1] + ".";
     }
-    return enumeracion;
+    return oracion.charAt(0).toUpperCase() + oracion.slice(1);
 }
 console.log("enumerarLista(): ", enumerarLista(["Han", "Leia", "Luke", "Yoda"]))
