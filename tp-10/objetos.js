@@ -27,20 +27,19 @@ var personaEjemplo = {
  * }
  */
 function crearPersona(nombre, apellido, edad, documento) {
-    persona = {
+    return {
         nombre: nombre,
         apellido: apellido,
         edad: edad,
         documento: documento
-    }
+    };
 }
-let nombre = "nombre";
-let apellido = "apellido";
-let edad = "edad";
-let documento = "documento";
+let nombre = "Juan";
+let apellido = "Pérez";
+let edad = 20;
+let documento = 123456;
 let persona = crearPersona(nombre, apellido, edad, documento);
 console.log(persona);
-
 
 /**
  * 02 - agregarApodo
